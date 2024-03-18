@@ -82,6 +82,9 @@ resource "vsphere_virtual_machine" "avi_controller" {
   provisioner "local-exec" {
     command = "bash ${path.module}/files/change-controller-password.sh --controller-address \"${var.controller_ip[count.index]}\" --current-password \"${var.controller_default_password}\" --new-password \"${var.controller_password}\""
   }
+  provisioner "local-exec" {
+    command = "bash ${path.module}/files/upload_ssh_public_key.sh --controller-address \"${var.controller_ip[count.index]}\" --password \"${var.controller_password}\" --ssh-public-key \"${var.controller_authorized_ssh_key}\""
+  }
 }
 resource "vsphere_compute_cluster_vm_anti_affinity_rule" "avi" {
   count               = var.controller_ha ? 1 : 0

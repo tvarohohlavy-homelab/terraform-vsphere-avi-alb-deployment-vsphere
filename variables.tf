@@ -84,6 +84,11 @@ variable "controller_password" {
     error_message = "The controller_password value must be more than 8 characters and contain at least one each of uppercase, lowercase, numbers, and special characters."
   }
 }
+variable "controller_authorized_ssh_key" {
+  description = "This is the ssh public key that will be inserted into authorized_keys for admin user."
+  type        = string
+  sensitive   = false
+}
 variable "avi_version" {
   description = "The version of Avi that will be deployed"
   type        = string

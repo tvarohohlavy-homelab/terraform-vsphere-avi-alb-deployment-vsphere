@@ -100,7 +100,8 @@ resource "null_resource" "ansible_provisioner" {
     host     = var.controller_ip[0]
     user     = "admin"
     timeout  = "600s"
-    password = var.controller_password
+    #password = var.controller_password
+    private_key = file("~/.ssh/id_rsa")
   }
   provisioner "remote-exec" {
     inline = ["mkdir ansible"]
